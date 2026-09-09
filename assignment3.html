@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alexander Albarran's COP4813 Assignment 3 HTML5 and JavaScript form.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 3 - Contact Form | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Assignment 3 - Forms</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html" aria-current="page">Assignment 3</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">HTML Resource</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="form-intro">
+            <div>
+                <span class="eyebrow">COP4813 • HTML5 + JavaScript</span>
+                <h2>Contact Information Form</h2>
+                <p>
+                    Please complete every required field. Your information will be
+                    checked before you can continue to the confirmation page.
+                </p>
+            </div>
+            <img src="daytona-state-mascot.jpg"
+                 alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card form-card">
+            <p class="required-note"><strong>*</strong> Required field</p>
+
+            <form id="contactForm" action="confirmation.html" method="get" novalidate>
+                <fieldset>
+                    <legend>Personal Information</legend>
+
+                    <div class="form-grid two-column">
+                        <div class="form-group">
+                            <label for="firstName">First Name <span aria-hidden="true">*</span></label>
+                            <input id="firstName" name="firstName" type="text"
+                                   autocomplete="given-name" required
+                                   pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,39}"
+                                   title="Enter a first name using letters, spaces, apostrophes, or hyphens.">
+                            <small class="help">Enter your first name.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name <span aria-hidden="true">*</span></label>
+                            <input id="lastName" name="lastName" type="text"
+                                   autocomplete="family-name" required
+                                   pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}"
+                                   title="Enter a last name using letters, spaces, apostrophes, or hyphens.">
+                            <small class="help">Enter your last name.</small>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Mailing Address</legend>
+
+                    <div class="form-group">
+                        <label for="address">Street Address <span aria-hidden="true">*</span></label>
+                        <input id="address" name="address" type="text"
+                               autocomplete="street-address" required
+                               pattern="[0-9]{1,6}[A-Za-z0-9À-ÿ .,'#-]{4,99}"
+                               title="Enter a street number followed by the street name.">
+                        <small class="help">Example: 123 Main Street</small>
+                    </div>
+
+                    <div class="form-grid address-grid">
+                        <div class="form-group">
+                            <label for="city">City <span aria-hidden="true">*</span></label>
+                            <input id="city" name="city" type="text"
+                                   autocomplete="address-level2" required
+                                   pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                                   title="Enter a valid city name.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State <span aria-hidden="true">*</span></label>
+                            <select id="state" name="state" autocomplete="address-level1" required>
+                                <option value="">Select a state</option>
+                                <option>AL</option><option>AK</option><option>AZ</option><option>AR</option>
+                                <option>CA</option><option>CO</option><option>CT</option><option>DE</option>
+                                <option>FL</option><option>GA</option><option>HI</option><option>ID</option>
+                                <option>IL</option><option>IN</option><option>IA</option><option>KS</option>
+                                <option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                                <option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                                <option>MO</option><option>MT</option><option>NE</option><option>NV</option>
+                                <option>NH</option><option>NJ</option><option>NM</option><option>NY</option>
+                                <option>NC</option><option>ND</option><option>OH</option><option>OK</option>
+                                <option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                                <option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                                <option>VT</option><option>VA</option><option>WA</option><option>WV</option>
+                                <option>WI</option><option>WY</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
+                            <input id="zip" name="zip" type="text"
+                                   inputmode="numeric" autocomplete="postal-code"
+                                   required pattern="[0-9]{5}(-[0-9]{4})?"
+                                   title="Enter a 5-digit ZIP code or ZIP+4.">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contact Information</legend>
+
+                    <div class="form-grid two-column">
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
+                            <input id="phone" name="phone" type="tel"
+                                   inputmode="tel" autocomplete="tel" required
+                                   placeholder="(000) 000-0000"
+                                   pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+                                   title="Use the format (000) 000-0000.">
+                            <small class="help">Format: (000) 000-0000</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address <span aria-hidden="true">*</span></label>
+                            <input id="email" name="email" type="email"
+                                   autocomplete="email" required
+                                   placeholder="name@example.com">
+                            <small class="help">Example: name@domain.com</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">Birth Date <span aria-hidden="true">*</span></label>
+                        <input id="birthdate" name="birthdate" type="date"
+                               autocomplete="bday" required>
+                        <small id="birthdateMessage" class="help" aria-live="polite">
+                            Your birth date cannot be in the future.
+                        </small>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Your Message</legend>
+
+                    <div class="form-group">
+                        <label for="message">Message <span aria-hidden="true">*</span></label>
+                        <textarea id="message" name="message" rows="7" maxlength="1000"
+                                  required placeholder="Enter your message here..."></textarea>
+                        <small class="help"><span id="messageCount">0</span>/1000 characters</small>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Confirmation Check</legend>
+
+                    <div class="security-box">
+                        <p><strong>Security Question:</strong> What is <span id="question"></span>?</p>
+                        <div class="form-group">
+                            <label for="securityAnswer">Your Answer <span aria-hidden="true">*</span></label>
+                            <input id="securityAnswer" name="securityAnswer" type="number"
+                                   inputmode="numeric" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div id="formError" class="form-error" role="alert" aria-live="assertive"></div>
+
+                <div class="form-actions">
+                    <button class="button" type="submit">Review Information</button>
+                    <button class="button button-secondary" type="reset">Clear Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 3</p>
+    </footer>
+
+    <script src="assignment3.js"></script>
+</body>
+</html>

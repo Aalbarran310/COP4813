@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COP4813 Assignment 3 confirmation page.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Confirm Information | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Confirm Your Information</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">HTML Resource</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card confirmation-card">
+            <div class="confirmation-heading">
+                <span class="success-icon" aria-hidden="true">✓</span>
+                <div>
+                    <h2>Review Your Information</h2>
+                    <p>Please make sure everything below is correct before confirming.</p>
+                </div>
+            </div>
+
+            <div id="confirmationContent" class="confirmation-details"></div>
+
+            <div id="confirmationError" class="form-error" role="alert"></div>
+
+            <form id="emailForm" action="mailto:alexander_albarran@daytonastate.edu" method="post" enctype="text/plain">
+                <input type="hidden" name="Name" id="mailName">
+                <input type="hidden" name="Address" id="mailAddress">
+                <input type="hidden" name="Phone" id="mailPhone">
+                <input type="hidden" name="Email" id="mailEmail">
+                <input type="hidden" name="Birth Date" id="mailBirthdate">
+                <input type="hidden" name="Message" id="mailMessage">
+
+                <div class="form-actions">
+                    <a class="button button-secondary" href="assignment3.html">Go Back &amp; Edit</a>
+                    <button class="button" id="confirmButton" type="submit">Confirm &amp; Send</button>
+                </div>
+            </form>
+
+            <p class="privacy-note">
+                Clicking <strong>Confirm &amp; Send</strong> opens your email application
+                using the required <code>mailto:</code> form action.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 3</p>
+    </footer>
+
+    <script src="assignment3.js"></script>
+</body>
+</html>
