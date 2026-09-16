@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COP4813 Assignment 4 - JavaScript RC Circuit Calculator with Plotting">
+    <title>Assignment 4 - RC Circuit Calculator</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f9;
+            color: #222;
+        }
+
+        header {
+            background: #123b5d;
+            color: white;
+            text-align: center;
+            padding: 28px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        nav {
+            background: #1f6f8b;
+            text-align: center;
+            padding: 12px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #123b5d;
+            margin-top: 0;
+        }
+
+        .equation {
+            background: #eef6fa;
+            border-left: 5px solid #1f6f8b;
+            padding: 18px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .description {
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: 3px solid rgba(31, 111, 139, 0.2);
+            border-color: #1f6f8b;
+        }
+
+        .hint {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .buttons {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 5px;
+            padding: 12px 22px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #calculateBtn {
+            background: #1f6f8b;
+            color: white;
+        }
+
+        #resetBtn {
+            background: #ddd;
+            color: #222;
+        }
+
+        button:hover,
+        button:focus {
+            opacity: 0.88;
+        }
+
+        #error {
+            display: none;
+            background: #fff0f0;
+            color: #9b1c1c;
+            border: 1px solid #d99;
+            border-radius: 5px;
+            padding: 12px;
+            margin-top: 18px;
+        }
+
+        #results {
+            display: none;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            background: #eef6fa;
+            border-radius: 7px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .result-box strong {
+            display: block;
+            color: #123b5d;
+            font-size: 1.25rem;
+            margin-top: 6px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 430px;
+        }
+
+        footer {
+            background: #123b5d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 700px) {
+            .form-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+
+            .chart-container {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Assignment 4 - RC Circuit Calculator</h1>
+        <p>JavaScript Calculator with Interactive Plotting</p>
+    </header>
+
+    <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="assignment3.html">Assignment 3</a>
+        <a href="assignment4.html">Assignment 4</a>
+    </nav>
+
+    <main>
+        <section class="card">
+            <h2>RC Circuit Capacitor Charging</h2>
+
+            <p class="description">
+                This calculator demonstrates the voltage across a capacitor as it
+                charges in an RC (resistor-capacitor) circuit. The equation is
+                nonlinear and shows how the capacitor approaches the source voltage
+                over time.
+            </p>
+
+            <div class="equation" aria-label="Voltage equals initial voltage times one minus e to the negative time divided by resistance times capacitance">
+                V(t) = V₀(1 − e<sup>−t/(RC)</sup>)
+            </div>
+
+            <p class="description">
+                Enter the circuit values below and select a time range. The calculator
+                will calculate the capacitor voltage and create a plot with time on
+                the X-axis and voltage on the Y-axis.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Calculator Inputs</h2>
+
+            <form id="rcForm" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="voltage">Source Voltage V₀ (volts)</label>
+                        <input type="number" id="voltage" value="12" min="0.001" step="any" required>
+                        <span class="hint">Example: 12 V</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="resistance">Resistance R (ohms)</label>
+                        <input type="number" id="resistance" value="1000" min="0.001" step="any" required>
+                        <span class="hint">Example: 1000 Ω</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="capacitance">Capacitance C (farads)</label>
+                        <input type="number" id="capacitance" value="0.001" min="0.000001" step="any" required>
+                        <span class="hint">Example: 0.001 F (1000 μF)</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="timeRange">Time Range (seconds)</label>
+                        <input type="number" id="timeRange" value="10" min="0.001" step="any" required>
+                        <span class="hint">Example: 10 seconds</span>
+                    </div>
+
+                    <div class="field">
+                        <label for="points">Number of Plot Points</label>
+                        <input type="number" id="points" value="101" min="10" max="1000" step="1" required>
+                        <span class="hint">Between 10 and 1000 points</span>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" id="calculateBtn">Calculate and Plot</button>
+                    <button type="button" id="resetBtn">Reset</button>
+                </div>
+
+                <div id="error" role="alert"></div>
+            </form>
+        </section>
+
+        <section class="card" id="results">
+            <h2>Results</h2>
+
+            <div class="result-grid">
+                <div class="result-box">
+                    Time Constant τ
+                    <strong id="tauResult">--</strong>
+                </div>
+
+                <div class="result-box">
+                    Final Voltage
+                    <strong id="finalResult">--</strong>
+                </div>
+
+                <div class="result-box">
+                    Voltage at End of Range
+                    <strong id="endResult">--</strong>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="rcChart" aria-label="Plot of capacitor voltage versus time"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>COP4813 - Assignment 4</p>
+        <p>Created by Alexander Albarran</p>
+    </footer>
+
+    <script>
+        let rcChart = null;
+
+        const form = document.getElementById("rcForm");
+        const errorBox = document.getElementById("error");
+        const results = document.getElementById("results");
+
+        function showError(message) {
+            errorBox.textContent = message;
+            errorBox.style.display = "block";
+        }
+
+        function clearError() {
+            errorBox.textContent = "";
+            errorBox.style.display = "none";
+        }
+
+        function calculateRC(event) {
+            event.preventDefault();
+            clearError();
+
+            const v0 = Number(document.getElementById("voltage").value);
+            const resistance = Number(document.getElementById("resistance").value);
+            const capacitance = Number(document.getElementById("capacitance").value);
+            const timeRange = Number(document.getElementById("timeRange").value);
+            const points = Number(document.getElementById("points").value);
+
+            if (!Number.isFinite(v0) || v0 <= 0) {
+                showError("Please enter a source voltage greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(resistance) || resistance <= 0) {
+                showError("Please enter a resistance greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(capacitance) || capacitance <= 0) {
+                showError("Please enter a capacitance greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(timeRange) || timeRange <= 0) {
+                showError("Please enter a time range greater than 0.");
+                return;
+            }
+
+            if (!Number.isInteger(points) || points < 10 || points > 1000) {
+                showError("The number of plot points must be a whole number between 10 and 1000.");
+                return;
+            }
+
+            const tau = resistance * capacitance;
+            const labels = [];
+            const data = [];
+
+            for (let i = 0; i < points; i++) {
+                const t = (timeRange * i) / (points - 1);
+                const voltage = v0 * (1 - Math.exp(-t / tau));
+
+                labels.push(t);
+                data.push(voltage);
+            }
+
+            const endVoltage = data[data.length - 1];
+
+            document.getElementById("tauResult").textContent =
+                tau.toFixed(4) + " s";
+
+            document.getElementById("finalResult").textContent =
+                v0.toFixed(4) + " V";
+
+            document.getElementById("endResult").textContent =
+                endVoltage.toFixed(4) + " V";
+
+            results.style.display = "block";
+
+            if (rcChart !== null) {
+                rcChart.destroy();
+            }
+
+            rcChart = new Chart(document.getElementById("rcChart"), {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Capacitor Voltage V(t)",
+                        data: data,
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: "linear",
+                            title: {
+                                display: true,
+                                text: "Time (seconds)"
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: "Voltage (volts)"
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "RC Capacitor Charging Curve"
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return "Voltage: " + context.parsed.y.toFixed(4) + " V";
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function resetCalculator() {
+            form.reset();
+
+            document.getElementById("voltage").value = "12";
+            document.getElementById("resistance").value = "1000";
+            document.getElementById("capacitance").value = "0.001";
+            document.getElementById("timeRange").value = "10";
+            document.getElementById("points").value = "101";
+
+            clearError();
+            results.style.display = "none";
+
+            if (rcChart !== null) {
+                rcChart.destroy();
+                rcChart = null;
+            }
+        }
+
+        form.addEventListener("submit", calculateRC);
+        document.getElementById("resetBtn").addEventListener("click", resetCalculator);
+    </script>
+</body>
+</html>
