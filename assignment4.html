@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alexander Albarran's COP4813 Assignment 4 JavaScript calculator and plotting page.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 4 - Creating Plots | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Assignment 4 - Creating Plots</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="assignment4.html" aria-current="page">Assignment 4</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">HTML Resource</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="calculator-intro">
+            <div>
+                <span class="eyebrow">COP4813 • JavaScript + Plotting</span>
+                <h2>RC Circuit Calculator</h2>
+                <p>
+                    This calculator uses a nonlinear RC capacitor-charging equation
+                    and plots capacitor voltage over time.
+                </p>
+            </div>
+            <img src="daytona-state-mascot.jpg"
+                 alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card">
+            <h2>Equation</h2>
+            <p>
+                The calculator uses the capacitor charging equation below. The
+                source voltage, resistance, capacitance, and time range can be
+                changed to create a new plot.
+            </p>
+
+            <div class="equation-box">
+                V(t) = V₀(1 − e<sup>−t/(RC)</sup>)
+            </div>
+
+            <p>
+                The independent variable, time, is plotted on the X-axis. The
+                dependent variable, capacitor voltage, is plotted on the Y-axis.
+            </p>
+        </section>
+
+        <section class="card calculator-card">
+            <h2>Calculator Inputs</h2>
+            <p>Example values are provided so the calculator can be tested immediately.</p>
+
+            <form id="rcForm" novalidate>
+                <div class="calculator-grid">
+                    <div class="calculator-field">
+                        <label for="voltage">Source Voltage V₀ (volts)</label>
+                        <input id="voltage" name="voltage" type="number"
+                               value="12" min="0.001" step="any" required>
+                        <span class="calculator-help">Example: 12</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="resistance">Resistance R (ohms)</label>
+                        <input id="resistance" name="resistance" type="number"
+                               value="1000" min="0.001" step="any" required>
+                        <span class="calculator-help">Example: 1000</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="capacitance">Capacitance C (farads)</label>
+                        <input id="capacitance" name="capacitance" type="number"
+                               value="0.001" min="0.000001" step="any" required>
+                        <span class="calculator-help">Example: 0.001 F</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="timeRange">Time Range (seconds)</label>
+                        <input id="timeRange" name="timeRange" type="number"
+                               value="10" min="0.001" step="any" required>
+                        <span class="calculator-help">Example: 10</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="points">Plot Points</label>
+                        <input id="points" name="points" type="number"
+                               value="101" min="10" max="1000" step="1" required>
+                        <span class="calculator-help">10 to 1000 points</span>
+                    </div>
+                </div>
+
+                <div id="calculatorError" class="calculator-error" role="alert" aria-live="assertive"></div>
+
+                <div class="calculator-actions">
+                    <button class="button" type="submit">Calculate and Plot</button>
+                    <button class="button button-secondary" id="resetButton" type="button">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="results" class="card calculator-results" aria-live="polite">
+            <h2>Results and Plot</h2>
+
+            <div class="result-grid">
+                <div class="result-box">
+                    <span>Time Constant τ</span>
+                    <strong id="tauResult">--</strong>
+                </div>
+                <div class="result-box">
+                    <span>Source Voltage</span>
+                    <strong id="sourceResult">--</strong>
+                </div>
+                <div class="result-box">
+                    <span>Voltage at End of Range</span>
+                    <strong id="endResult">--</strong>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="rcChart" aria-label="Capacitor voltage plotted against time"></canvas>
+            </div>
+
+            <p class="calculator-note">
+                The graph shows time in seconds on the X-axis and capacitor voltage
+                in volts on the Y-axis.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 4</p>
+    </footer>
+
+    <script>
+        let rcChart = null;
+
+        const form = document.getElementById("rcForm");
+        const errorBox = document.getElementById("calculatorError");
+        const results = document.getElementById("results");
+
+        function showError(message) {
+            errorBox.textContent = message;
+            errorBox.classList.add("visible");
+        }
+
+        function clearError() {
+            errorBox.textContent = "";
+            errorBox.classList.remove("visible");
+        }
+
+        function calculateRC(event) {
+            event.preventDefault();
+            clearError();
+
+            const v0 = Number(document.getElementById("voltage").value);
+            const resistance = Number(document.getElementById("resistance").value);
+            const capacitance = Number(document.getElementById("capacitance").value);
+            const timeRange = Number(document.getElementById("timeRange").value);
+            const points = Number(document.getElementById("points").value);
+
+            if (!Number.isFinite(v0) || v0 <= 0) {
+                showError("Please enter a source voltage greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(resistance) || resistance <= 0) {
+                showError("Please enter a resistance greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(capacitance) || capacitance <= 0) {
+                showError("Please enter a capacitance greater than 0.");
+                return;
+            }
+
+            if (!Number.isFinite(timeRange) || timeRange <= 0) {
+                showError("Please enter a time range greater than 0.");
+                return;
+            }
+
+            if (!Number.isInteger(points) || points < 10 || points > 1000) {
+                showError("Plot points must be a whole number from 10 through 1000.");
+                return;
+            }
+
+            const tau = resistance * capacitance;
+            const timeValues = [];
+            const voltageValues = [];
+
+            for (let i = 0; i < points; i++) {
+                const t = (timeRange * i) / (points - 1);
+                const voltage = v0 * (1 - Math.exp(-t / tau));
+
+                timeValues.push(t);
+                voltageValues.push(voltage);
+            }
+
+            const endVoltage = voltageValues[voltageValues.length - 1];
+
+            document.getElementById("tauResult").textContent = tau.toFixed(4) + " s";
+            document.getElementById("sourceResult").textContent = v0.toFixed(4) + " V";
+            document.getElementById("endResult").textContent = endVoltage.toFixed(4) + " V";
+
+            results.classList.add("visible");
+
+            if (rcChart) {
+                rcChart.destroy();
+            }
+
+            rcChart = new Chart(document.getElementById("rcChart"), {
+                type: "line",
+                data: {
+                    datasets: [{
+                        label: "Capacitor Voltage V(t)",
+                        data: timeValues.map((time, index) => ({
+                            x: time,
+                            y: voltageValues[index]
+                        })),
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.15
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: "linear",
+                            title: {
+                                display: true,
+                                text: "Time (seconds)"
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: "Capacitor Voltage (volts)"
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "RC Capacitor Charging Curve"
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return "Voltage: " + context.parsed.y.toFixed(4) + " V";
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function resetCalculator() {
+            form.reset();
+            document.getElementById("voltage").value = "12";
+            document.getElementById("resistance").value = "1000";
+            document.getElementById("capacitance").value = "0.001";
+            document.getElementById("timeRange").value = "10";
+            document.getElementById("points").value = "101";
+
+            clearError();
+            results.classList.remove("visible");
+
+            if (rcChart) {
+                rcChart.destroy();
+                rcChart = null;
+            }
+        }
+
+        form.addEventListener("submit", calculateRC);
+        document.getElementById("resetButton").addEventListener("click", resetCalculator);
+    </script>
+</body>
+</html>
