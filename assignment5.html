@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alexander Albarran's COP4813 Assignment 5 HTML5 Canvas Spirograph.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 5 - Spirograph | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Assignment 5 - Spirograph</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="assignment4.html">Assignment 4</a></li>
+                    <li><a href="assignment5.html" aria-current="page">Assignment 5</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener">Canvas Resource</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="spiro-intro">
+            <div>
+                <span class="eyebrow">COP4813 • HTML5 Canvas + JavaScript</span>
+                <h2>Canvas Spirograph</h2>
+                <p>
+                    This page uses JavaScript and the HTML5 canvas to draw a
+                    Spirograph from the required mathematical equations.
+                </p>
+            </div>
+            <img src="daytona-state-mascot.jpg"
+                 alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card">
+            <h2>Spirograph Equation</h2>
+            <p>
+                The pen position is calculated from the outer circle radius R,
+                inner circle radius r, pen offset O, and the changing value of t.
+            </p>
+
+            <div class="equation-box">
+                x = (R + r) cos(t) − (r + O) cos(((R + r) / r)t)
+                <br>
+                y = (R + r) sin(t) − (r + O) sin(((R + r) / r)t)
+            </div>
+
+            <p>
+                Change the values below and select <strong>Start Spirograph</strong>
+                to draw a new pattern.
+            </p>
+        </section>
+
+        <section class="card spiro-card">
+            <h2>Spirograph Settings</h2>
+            <p>Use positive values for R and r. The pen offset O can be zero or greater.</p>
+
+            <form id="spiroForm" novalidate>
+                <div class="spiro-grid">
+                    <div class="calculator-field">
+                        <label for="outerRadius">Outer Radius R</label>
+                        <input id="outerRadius" name="outerRadius" type="number"
+                               value="180" min="20" max="400" step="1" required>
+                        <span class="calculator-help">20 to 400</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="innerRadius">Inner Radius r</label>
+                        <input id="innerRadius" name="innerRadius" type="number"
+                               value="65" min="5" max="200" step="1" required>
+                        <span class="calculator-help">5 to 200 and less than R</span>
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="penOffset">Pen Offset O</label>
+                        <input id="penOffset" name="penOffset" type="number"
+                               value="45" min="0" max="250" step="1" required>
+                        <span class="calculator-help">0 to 250</span>
+                    </div>
+                </div>
+
+                <div id="spiroError" class="calculator-error" role="alert" aria-live="assertive"></div>
+
+                <div class="calculator-actions">
+                    <button class="button" type="submit">Start Spirograph</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card spiro-results">
+            <h2>Canvas Drawing</h2>
+            <div class="canvas-wrapper">
+                <canvas id="spiroCanvas" width="900" height="600"
+                        aria-label="Animated Spirograph drawing"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 5</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("spiroForm");
+        const canvas = document.getElementById("spiroCanvas");
+        const ctx = canvas.getContext("2d");
+        const errorBox = document.getElementById("spiroError");
+
+        let animationId = null;
+        let t = 0;
+        let previousPoint = null;
+        let drawSteps = 0;
+
+        function showError(message) {
+            errorBox.textContent = message;
+            errorBox.classList.add("visible");
+        }
+
+        function clearError() {
+            errorBox.textContent = "";
+            errorBox.classList.remove("visible");
+        }
+
+        function getPosition(R, r, O, angle) {
+            return {
+                x: (R + r) * Math.cos(angle) -
+                   (r + O) * Math.cos(((R + r) / r) * angle),
+                y: (R + r) * Math.sin(angle) -
+                   (r + O) * Math.sin(((R + r) / r) * angle)
+            };
+        }
+
+        function drawFrame(R, r, O) {
+            const point = getPosition(R, r, O, t);
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            if (previousPoint) {
+                ctx.beginPath();
+                ctx.moveTo(centerX + previousPoint.x, centerY + previousPoint.y);
+                ctx.lineTo(centerX + point.x, centerY + point.y);
+                ctx.stroke();
+            }
+
+            previousPoint = point;
+            t += 0.035;
+            drawSteps++;
+
+            if (drawSteps < 14000) {
+                animationId = requestAnimationFrame(() => drawFrame(R, r, O));
+            } else {
+                animationId = null;
+            }
+        }
+
+        function startSpirograph(event) {
+            event.preventDefault();
+            clearError();
+
+            const R = Number(document.getElementById("outerRadius").value);
+            const r = Number(document.getElementById("innerRadius").value);
+            const O = Number(document.getElementById("penOffset").value);
+
+            if (!Number.isFinite(R) || R < 20 || R > 400) {
+                showError("Outer radius R must be between 20 and 400.");
+                return;
+            }
+
+            if (!Number.isFinite(r) || r < 5 || r > 200) {
+                showError("Inner radius r must be between 5 and 200.");
+                return;
+            }
+
+            if (r >= R) {
+                showError("Inner radius r must be smaller than outer radius R.");
+                return;
+            }
+
+            if (!Number.isFinite(O) || O < 0 || O > 250) {
+                showError("Pen offset O must be between 0 and 250.");
+                return;
+            }
+
+            if (animationId !== null) {
+                cancelAnimationFrame(animationId);
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.lineWidth = 2;
+            ctx.lineJoin = "round";
+            ctx.lineCap = "round";
+            ctx.strokeStyle = "#0b5fa5";
+
+            t = 0;
+            previousPoint = null;
+            drawSteps = 0;
+
+            drawFrame(R, r, O);
+        }
+
+        form.addEventListener("submit", startSpirograph);
+    </script>
+</body>
+</html>
