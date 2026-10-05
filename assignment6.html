@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alexander Albarran's COP4813 Assignment 6 JSON data page.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 6 - JSON | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Assignment 6 - JSON</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="assignment4.html">Assignment 4</a></li>
+                    <li><a href="assignment5.html">Assignment 5</a></li>
+                    <li><a href="assignment6.html" aria-current="page">Assignment 6</a></li>
+                    <li><a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank" rel="noopener">JSON Resource</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="json-intro">
+            <div>
+                <span class="eyebrow">COP4813 • JSON + JavaScript</span>
+                <h2>Basketball Scoring Data</h2>
+                <p>
+                    This page reads basketball player data from an external JSON
+                    file and displays it in a readable table.
+                </p>
+            </div>
+            <img src="daytona-state-mascot.jpg"
+                 alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card">
+            <h2>About the JSON Data</h2>
+            <p>
+                The player information is stored in the external
+                <strong>myjson.json</strong> file. The page uses JavaScript to
+                read the file, parse the JSON data, and create the table below.
+            </p>
+            <p class="json-note">
+                The HTML page does not contain the player records. The records
+                are loaded from the external JSON file.
+            </p>
+        </section>
+
+        <section class="card json-card">
+            <h2>Player Scoring Data</h2>
+            <div id="jsonStatus" class="json-status" role="status" aria-live="polite">
+                Loading JSON data...
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <caption>Sample basketball player scoring records</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Player</th>
+                            <th scope="col">Team</th>
+                            <th scope="col">Season</th>
+                            <th scope="col">Games</th>
+                            <th scope="col">Scoring</th>
+                        </tr>
+                    </thead>
+                    <tbody id="playerTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 6</p>
+    </footer>
+
+    <script>
+        const statusBox = document.getElementById("jsonStatus");
+        const tableBody = document.getElementById("playerTableBody");
+
+        function displayPlayers(data) {
+            tableBody.innerHTML = "";
+
+            data.players.forEach(function(player) {
+                const row = document.createElement("tr");
+
+                row.innerHTML =
+                    "<td>" + player.playerName + "</td>" +
+                    "<td>" + player.team + "</td>" +
+                    "<td>" + player.season + "</td>" +
+                    "<td>" + player.games + "</td>" +
+                    "<td>" + player.scoring + "</td>";
+
+                tableBody.appendChild(row);
+            });
+
+            statusBox.textContent =
+                data.players.length + " player records loaded from myjson.json.";
+            statusBox.classList.add("success");
+        }
+
+        if (window.location.protocol === "file:") {
+            statusBox.textContent =
+                "For local testing, open Start Assignment 6.command in this folder. " +
+                "Then use the browser window it opens. The external myjson.json file " +
+                "must be loaded through a web server.";
+            statusBox.classList.add("error");
+        } else {
+            fetch("myjson.json")
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error("The JSON file could not be loaded.");
+                    }
+                    return response.json();
+                })
+                .then(function(data) {
+                    displayPlayers(data);
+                })
+                .catch(function(error) {
+                    statusBox.textContent =
+                        "Unable to load the JSON data. " + error.message;
+                    statusBox.classList.add("error");
+                });
+        }
+    </script>
+</body>
+</html>
