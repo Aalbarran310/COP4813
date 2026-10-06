@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Alexander Albarran's COP4813 Assignment 7 drag and drop card game.">
+<meta name="author" content="Alexander Albarran">
+<title>Assignment 7 - Drag and Drop | COP4813</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<div class="container">
+<h1>Assignment 7 - Drag and Drop</h1>
+<p class="subtitle">COP4813 Web Programming</p>
+<nav aria-label="Main navigation">
+<ul class="menu">
+<li><a href="index.html">Home</a></li>
+<li><a href="assignments.html">My Assignments</a></li>
+<li><a href="assignment1.html">Assignment 1</a></li>
+<li><a href="assignment3.html">Assignment 3</a></li>
+<li><a href="assignment4.html">Assignment 4</a></li>
+<li><a href="assignment5.html">Assignment 5</a></li>
+<li><a href="assignment6.html">Assignment 6</a></li>
+<li><a href="assignment7.html" aria-current="page">Assignment 7</a></li>
+<li><a href="https://www.w3schools.com/js/js_htmldom_draganddrop.asp" target="_blank" rel="noopener">Drag &amp; Drop Resource</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main class="container">
+<section class="dragdrop-intro">
+<div>
+<span class="eyebrow">COP4813 • HTML5 + JavaScript</span>
+<h2>Drag and Drop Card Game</h2>
+<p>Deal a hand of cards and drag a card to the discard pile. The page captures the drop event and deals a replacement card.</p>
+</div>
+<img src="daytona-state-mascot.jpg" alt="Daytona State College mascot holding a Daytona State banner">
+</section>
+
+<section class="card dragdrop-card">
+<h2>Play the Game</h2>
+<div class="dragdrop-controls">
+<button id="dealButton" class="button" type="button">Deal 5 Cards</button>
+<button id="resetButton" class="button button-secondary" type="button">Reset</button>
+<p id="dragDropStatus" class="dragdrop-status" role="status" aria-live="polite">Click "Deal 5 Cards" to start.</p>
+</div>
+
+<div class="dragdrop-board">
+<section class="hand-panel" aria-labelledby="hand-heading">
+<h3 id="hand-heading">Your Hand</h3>
+<div id="cardHand" class="card-hand" aria-label="Your cards"></div>
+</section>
+
+<section id="discardPile" class="discard-panel" aria-labelledby="discard-heading">
+<h3 id="discard-heading">Discard Pile</h3>
+<div class="discard-placeholder">
+<strong>DROP CARD HERE</strong>
+<span>Drag a card from your hand to this area.</span>
+</div>
+</section>
+</div>
+
+<div class="dragdrop-help">
+<h3>How It Works</h3>
+<p>Click <strong>Deal 5 Cards</strong> to create and shuffle a standard 52-card deck. Five different cards are dealt to the hand. Drag one card to the <strong>Discard Pile</strong>. JavaScript captures the drop event, displays a confirmation message, and deals a replacement card.</p>
+</div>
+</section>
+</main>
+
+<footer>
+<p>Created by Alexander Albarran</p>
+<p>COP4813 • Assignment 7</p>
+</footer>
+<script src="assignment7.js"></script>
+</body>
+</html>
