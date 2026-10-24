@@ -316,3 +316,18 @@ drag-and-drop functionality.
 
 Created by Alexander Albarran
 COP4813
+==================================================
+ASSIGNMENT 9 - ANIMATION
+==================================================
+
+Assignment 9 uses JavaScript and HTML5 Canvas to animate the Daytona
+State College mascot. The image moves diagonally inside a rectangular
+canvas and bounces when it reaches an edge. Clicking the mascot creates
+a short particle burst and changes its direction. Pause and restart
+buttons are also included.
+
+Files:
+- assignment9.html
+- assignment9.js
+- style.css
+- daytona-state-mascot.jpg
