@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COP4813 Assignment 9 using JavaScript to animate a bouncing object on an HTML5 canvas.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 9 - Animation | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Assignment 9 - Animation</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="assignment4.html">Assignment 4</a></li>
+                    <li><a href="assignment5.html">Assignment 5</a></li>
+                    <li><a href="assignment6.html">Assignment 6</a></li>
+                    <li><a href="assignment7.html">Assignment 7</a></li>
+                    <li><a href="assignment9.html" aria-current="page">Assignment 9</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="animation-intro">
+            <div>
+                <span class="eyebrow">COP4813 • HTML5 Canvas + JavaScript</span>
+                <h2>Bouncing Daytona State Mascot</h2>
+                <p>The mascot moves diagonally around the canvas and bounces off the edges. Click the mascot to trigger a burst effect and send it in a new direction.</p>
+            </div>
+            <img src="daytona-state-mascot.jpg" alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card animation-card">
+            <h2>Try the Animation</h2>
+            <p class="animation-instructions">Click the mascot while it is moving. Use the buttons to pause, resume, or restart the animation.</p>
+            <div class="animation-canvas-wrapper">
+                <canvas id="animationCanvas" width="900" height="440" aria-label="Animated Daytona State mascot bouncing inside a rectangular area. Click the mascot for an effect.">
+                    Your browser does not support the HTML5 canvas element.
+                </canvas>
+            </div>
+            <div class="animation-controls">
+                <button id="pauseButton" class="button" type="button">Pause Animation</button>
+                <button id="restartButton" class="button button-secondary" type="button">Restart Animation</button>
+                <p id="animationStatus" role="status" aria-live="polite">The mascot is moving. Click it to make it burst and change direction.</p>
+            </div>
+            <div class="animation-help">
+                <h3>How It Works</h3>
+                <p>JavaScript uses a timer-based animation loop to update the mascot's x and y coordinates. When the image reaches an edge of the canvas, its direction is reversed so it stays inside the rectangle. Clicking the mascot creates a short burst of particles and changes its direction.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 9</p>
+    </footer>
+    <script src="assignment9.js"></script>
+</body>
+</html>
