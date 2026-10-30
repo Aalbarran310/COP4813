@@ -331,3 +331,30 @@ Files:
 - assignment9.js
 - style.css
 - daytona-state-mascot.jpg
+==================================================
+ASSIGNMENT 10 - MOBILE READY
+==================================================
+
+Assignment 10 updates the main COP4813 homepage so the website can
+adjust to desktop, tablet, and mobile screen sizes.
+
+The responsive layout uses the existing shared stylesheet. The mobile
+layout keeps the homepage content and navigation choices available,
+increases the size of menu links for touch input, and adjusts images
+and content areas to fit smaller screens.
+
+Files:
+- index.html
+- style.css
+- assignments.html
+- assignment10.html
+
+The Assignment 10 page documents the mobile changes and provides
+areas for the actual Google Lighthouse screenshots, scores, and
+analysis. Lighthouse results must be added after running the audit
+in Chrome DevTools using Navigation mode and the Mobile device
+setting. The four required categories are Performance, Accessibility,
+Best Practices, and SEO.
+
+Created by Alexander Albarran
+COP4813
