@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COP4813 Assignment 10 documenting the mobile-ready website and Lighthouse audit results.">
+    <meta name="author" content="Alexander Albarran">
+    <title>Assignment 10 - Mobile Ready | COP4813</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mobile-intro {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 28px; padding: 28px; margin-bottom: 24px; color: white;
+            background: linear-gradient(135deg, #0b5fa5, #168a5b); border-radius: 10px;
+        }
+        .mobile-intro h2 { color: white; margin: 6px 0 8px; }
+        .mobile-intro p { margin: 0; max-width: 650px; }
+        .mobile-intro img {
+            width: 190px; height: 140px; object-fit: cover;
+            border: 4px solid #7ac943; border-radius: 10px;
+        }
+        .audit-table-wrap { width: 100%; overflow-x: auto; }
+        .audit-table { width: 100%; border-collapse: collapse; }
+        .audit-table th, .audit-table td {
+            padding: 12px; text-align: left; border-bottom: 1px solid #dfe8ee;
+        }
+        .audit-table th { color: white; background: #084b83; }
+        .score { color: #168a5b; font-weight: bold; }
+        .audit-shot { margin: 20px 0 28px; }
+        .audit-shot img {
+            display: block; width: 100%; height: auto; margin-top: 10px;
+            border: 1px solid #cbdbe8; border-radius: 6px;
+        }
+        .audit-shot figcaption { color: #5c6b75; font-size: .92rem; margin-top: 8px; }
+        .audit-note {
+            padding: 15px; background: #eefaf4;
+            border-left: 5px solid #168a5b; border-radius: 6px;
+        }
+        .mobile-checks li { margin-bottom: 8px; }
+        @media (max-width: 700px) {
+            .mobile-intro { flex-direction: column; align-items: flex-start; padding: 22px; }
+            .mobile-intro img { width: 100%; height: auto; max-width: 450px; }
+            .audit-table th, .audit-table td { padding: 9px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Assignment 10 - Mobile Ready</h1>
+            <p class="subtitle">COP4813 Web Programming</p>
+            <nav aria-label="Main navigation">
+                <ul class="menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assignments.html">My Assignments</a></li>
+                    <li><a href="assignment1.html">Assignment 1</a></li>
+                    <li><a href="assignment3.html">Assignment 3</a></li>
+                    <li><a href="assignment4.html">Assignment 4</a></li>
+                    <li><a href="assignment5.html">Assignment 5</a></li>
+                    <li><a href="assignment6.html">Assignment 6</a></li>
+                    <li><a href="assignment7.html">Assignment 7</a></li>
+                    <li><a href="assignment9.html">Assignment 9</a></li>
+                    <li><a href="assignment10.html" aria-current="page">Assignment 10</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="mobile-intro">
+            <div>
+                <span class="eyebrow">COP4813 • Responsive Web Design</span>
+                <h2>Making My Website Mobile Ready</h2>
+                <p>This assignment updates my COP4813 homepage so it can be viewed on desktop computers, tablets, and mobile phones while keeping the same content and navigation choices.</p>
+            </div>
+            <img src="daytona-state-mascot.jpg" alt="Daytona State College mascot holding a Daytona State banner">
+        </section>
+
+        <section class="card">
+            <h2>Mobile Website Changes</h2>
+            <p>I kept the existing website design and used responsive CSS so the same homepage can adjust to different screen sizes. The layout changes when the screen becomes narrower instead of sending visitors to a separate mobile page.</p>
+            <ul class="mobile-checks">
+                <li>The viewport is set so the page uses the device's actual screen width.</li>
+                <li>The navigation links rearrange for smaller screens and remain available to tap.</li>
+                <li>Navigation links have touch-friendly areas so they are easier to select on a phone.</li>
+                <li>The homepage content and mascot image resize to fit the available width.</li>
+                <li>Multi-column areas change to a single-column layout on narrow screens.</li>
+                <li>The same homepage and menu are used on desktop and mobile devices.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Google Lighthouse Results</h2>
+            <p>I tested the published homepage, <a href="https://aalbarran310.github.io/COP4813/">COP4813 website homepage</a>, with Chrome DevTools Lighthouse. The report was generated on October 29, 2026 at approximately 8:29 PM. I selected Navigation mode and Mobile device emulation.</p>
+            <div class="audit-table-wrap">
+                <table class="audit-table">
+                    <thead><tr><th scope="col">Category</th><th scope="col">Score</th><th scope="col">Result</th></tr></thead>
+                    <tbody>
+                        <tr><td>Performance</td><td class="score">100</td><td>All scored performance checks passed.</td></tr>
+                        <tr><td>Accessibility</td><td class="score">100</td><td>All automated accessibility audits passed.</td></tr>
+                        <tr><td>Best Practices</td><td class="score">100</td><td>All scored best-practice checks passed.</td></tr>
+                        <tr><td>SEO</td><td class="score">100</td><td>All scored SEO checks passed.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="audit-note"><strong>Overall result:</strong> The homepage received a score of 100 in all four Lighthouse categories during this mobile Navigation-mode test.</p>
+        </section>
+
+        <section class="card">
+            <h2>Performance Details</h2>
+            <p>The homepage's Performance score was 100. Lighthouse reported these measurements:</p>
+            <div class="audit-table-wrap">
+                <table class="audit-table">
+                    <thead><tr><th scope="col">Metric</th><th scope="col">Result</th></tr></thead>
+                    <tbody>
+                        <tr><td>First Contentful Paint</td><td>0.8 seconds</td></tr>
+                        <tr><td>Largest Contentful Paint</td><td>1.2 seconds</td></tr>
+                        <tr><td>Total Blocking Time</td><td>0 milliseconds</td></tr>
+                        <tr><td>Cumulative Layout Shift</td><td>0.017</td></tr>
+                        <tr><td>Speed Index</td><td>0.8 seconds</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Lighthouse also listed opportunities involving cache lifetimes (estimated savings of 75 KiB), image delivery (estimated savings of 42 KiB), LCP request discovery, the network dependency tree, render-blocking requests, layout shift culprits, and LCP breakdown. Its diagnostics noted that image elements do not have explicit width and height attributes. These items are improvement suggestions and did not prevent the page from receiving a Performance score of 100.</p>
+        </section>
+
+        <section class="card">
+            <h2>Accessibility, Best Practices, and SEO</h2>
+            <h3>Accessibility — 100</h3>
+            <p>The automated Accessibility score was 100, with 18 passed audits shown in the report. Lighthouse also displayed 10 additional items for manual checking, including keyboard focus, logical tab order, visible focus behavior, landmark navigation, and labels and roles for custom controls. These are manual review prompts, not reported automated failures.</p>
+            <h3>Best Practices — 100</h3>
+            <p>The Best Practices report showed 13 passed audits and 2 items marked not applicable. The report displayed security-related checks such as content security policy, HSTS, COOP, clickjacking protection, and Trusted Types. No scored best-practice issue lowered the score.</p>
+            <h3>SEO — 100</h3>
+            <p>The SEO report showed 8 passed audits and 2 items marked not applicable. It also displayed one additional manual check for structured data validity. The automated SEO score was 100.</p>
+        </section>
+
+        <section class="card">
+            <h2>Lighthouse Screenshots</h2>
+            <p>The screenshots below are from the Lighthouse audit of the published homepage, not the Assignment 10 documentation page.</p>
+
+            <figure class="audit-shot">
+                <h3>Overall Lighthouse Results</h3>
+                <img src="lighthouse-screenshots/lighthouse-overall.png" alt="Lighthouse overview for the COP4813 homepage showing scores of 100 for Performance, Accessibility, Best Practices, and SEO">
+                <figcaption>Figure 1. Overall mobile Lighthouse scores for the homepage.</figcaption>
+            </figure>
+
+            <figure class="audit-shot">
+                <h3>Performance Details</h3>
+                <img src="lighthouse-screenshots/lighthouse-performance.png" alt="Lighthouse Performance report showing a score of 100 and the homepage performance metrics">
+                <figcaption>Figure 2. Performance score, metrics, insights, and diagnostics.</figcaption>
+            </figure>
+
+            <figure class="audit-shot">
+                <h3>Accessibility Details</h3>
+                <img src="lighthouse-screenshots/lighthouse-accessibility.png" alt="Lighthouse Accessibility report showing a score of 100 and additional manual checks">
+                <figcaption>Figure 3. Accessibility score and manual review items.</figcaption>
+            </figure>
+
+            <figure class="audit-shot">
+                <h3>Best Practices Details</h3>
+                <img src="lighthouse-screenshots/lighthouse-best-practices.png" alt="Lighthouse Best Practices report showing a score of 100">
+                <figcaption>Figure 4. Best Practices score and audit sections.</figcaption>
+            </figure>
+
+            <figure class="audit-shot">
+                <h3>SEO Details</h3>
+                <img src="lighthouse-screenshots/lighthouse-seo.png" alt="Lighthouse SEO report showing a score of 100 and a structured data manual check">
+                <figcaption>Figure 5. SEO score and additional structured data check.</figcaption>
+            </figure>
+        </section>
+
+        <section class="card">
+            <h2>Analysis</h2>
+            <p>The Lighthouse test of my published homepage returned 100 for Performance, Accessibility, Best Practices, and SEO. The performance measurements were also strong: First Contentful Paint was 0.8 seconds, Largest Contentful Paint was 1.2 seconds, Total Blocking Time was 0 milliseconds, Cumulative Layout Shift was 0.017, and Speed Index was 0.8 seconds.</p>
+            <p>Even though all four category scores were 100, Lighthouse identified a few areas that could still be improved. These included browser cache lifetimes, image delivery, render-blocking requests, and adding explicit width and height attributes to images. Lighthouse also provided manual accessibility checks and a structured-data check for SEO. Those items should be reviewed separately because an automated score does not replace manual testing.</p>
+            <p>Overall, the results show that the homepage performed well in this mobile Lighthouse test. The responsive layout keeps the same website content and navigation available while adapting the page to a smaller screen. I will continue to review the suggested improvements and manually test the page on a phone to make sure the menu and content are easy to use.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created by Alexander Albarran</p>
+        <p>COP4813 • Assignment 10</p>
+    </footer>
+</body>
+</html>
