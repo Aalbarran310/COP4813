@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive Daytona State College Software Development degree course planner for COP4813 Assignment 11.">
+<meta name="author" content="Alexander Albarran"><title>Assignment 11 - Dynamic Course Advisor</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.advisor-intro,.advisor-panel,.course-card,.plan-term{background:#fff;border-radius:12px;padding:1.1rem;margin:1rem 0;box-shadow:0 2px 9px #00000012}
+.advisor-panel h2,.advisor-intro h2{color:#0b5fa5;margin-top:0}
+.advisor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}
+.course-list{display:grid;gap:.7rem}.course-card{margin:0;border-left:5px solid #168a5b}
+.course-card h3{margin:.1rem 0;color:#0b5fa5;font-size:1.08rem}.course-meta,.small-note{font-size:.9rem;color:#4b5563}
+.course-actions,.filter-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.7rem}
+.advisor-btn{border:0;border-radius:7px;padding:.6rem .85rem;background:#0b5fa5;color:white;font-weight:600;cursor:pointer}
+.advisor-btn.secondary{background:#168a5b}.advisor-btn:disabled{background:#9ca3af;cursor:not-allowed}
+.advisor-btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d49b18;outline-offset:2px}
+.status{padding:.7rem;border-radius:8px;background:#eef6ff;margin:.6rem 0}.plan-term{border:2px dashed #b7c9d8;min-height:90px;transition:background .15s,border-color .15s}.plan-term.drag-over{background:#e7f5ed;border-color:#168a5b}.course-card[draggable="true"]{cursor:grab}.course-card[draggable="true"]:active{cursor:grabbing}
+.plan-term h3{margin-top:0;color:#0b5fa5}.plan-item{display:flex;justify-content:space-between;gap:.5rem;align-items:center;padding:.55rem;background:#eef6ff;border-radius:7px;margin:.45rem 0}
+.filter-row select,select{padding:.55rem;border:1px solid #9aa9b5;border-radius:6px}
+@media(max-width:650px){.plan-item{align-items:flex-start;flex-direction:column}.advisor-btn{min-height:42px}}
+</style></head>
+<body><header><div class="container"><h1>Dynamic Course Advisor</h1><p class="subtitle">COP4813 - Assignment 11</p>
+<nav aria-label="Main navigation"><ul class="menu"><li><a href="index.html">Home</a></li><li><a href="assignments.html">My Assignments</a></li><li><a href="assignment11.html" aria-current="page">Assignment 11</a></li></ul></nav></div></header>
+<main class="container">
+<section class="advisor-intro"><h2>Software Development, A.S. Degree Planner</h2>
+<p>This tool helps students organize courses for Daytona State College's Software Development A.S. program. Mark courses you have passed to see which courses may be available to plan next.</p>
+<p class="small-note">Based on the 2026-2027 program guide. This is a student planning aid, not an official degree audit. Confirm your catalog year, course availability, and prerequisites with an academic advisor.</p>
+<p><a href="https://daytonastate.smartcatalogiq.com/en/2026-2027/college-catalog/program-guides/a-s-degree/software-development-a-s-degree" target="_blank" rel="noopener">View the official Daytona State program guide</a></p></section>
+<section class="advisor-panel"><h2>1. Courses I have completed</h2><p>Check the courses you have already passed. Update your selections whenever needed.</p><div id="completed-list" class="course-list" aria-live="polite"></div><div id="progress-summary" class="status" aria-live="polite">Loading course information...</div></section>
+<div class="advisor-grid">
+<section class="advisor-panel"><h2>2. Courses I can plan</h2><p>Eligible courses appear here based on your completed courses and the program choice rules.</p>
+<div class="filter-row"><label for="category-filter">Show:</label><select id="category-filter"><option value="All">All categories</option><option>Program core</option><option>Programming choice</option><option>Program elective</option></select></div><div id="available-list" class="course-list" aria-live="polite"></div></section>
+<section class="advisor-panel"><h2>3. My semester plan</h2><label for="term-select">Planning term:</label><select id="term-select"><option>Fall</option><option>Spring</option><option>Summer</option></select>
+<p class="small-note">You can drag an eligible course card here, or use its Add to Plan button.</p><div id="plan-list" class="plan-term" aria-label="Drop courses here to add them to your semester plan" aria-live="polite"><h3>Selected courses</h3><p>No courses added yet.</p></div><p id="plan-total" class="status">Planned credits: 0</p></section></div>
+<section class="advisor-panel"><h2>How the rules work</h2><ul><li><strong>AND:</strong> every course in <code>allOf</code> must be completed.</li><li><strong>OR:</strong> at least one course in <code>anyOf</code> must be completed.</li><li><strong>Program choice:</strong> COP2360 or COP2800 satisfies the programming-language choice. Selecting one disables the other and displays a note.</li><li><strong>Electives:</strong> the program guide says to choose three courses from the elective list.</li></ul>
+<p class="small-note">The COP2360 course description lists COP1000 as its prerequisite. The guide lists C# and Java as alternatives. Other course prerequisites are not assumed here; check current course descriptions.</p>
+<div class="status"><strong>OR prerequisite demonstration (practice example only)</strong>
+<p>This example is not a real degree requirement or course. It demonstrates an OR prerequisite: completing COP1000 OR CET1600 makes the sample item eligible. You can test it by marking either course completed above.</p>
+<div id="or-demo" aria-live="polite"></div></div>
+</section>
+<section class="advisor-panel"><h2>Modifications included</h2><ol><li>Selected Daytona State College's 2026-2027 Software Development A.S. program.</li><li>Stored course data, credits, notes, and prerequisite rules in JSON.</li><li>Generated course cards and checkboxes dynamically with JavaScript.</li><li>Added completed-course tracking and automatic eligibility updates.</li><li>Added AND/OR prerequisite logic and the C# / Java alternative rule.</li><li>Added notes, elective selection guidance, and a semester planner.</li><li>Added dynamically generated buttons that respond to click events.</li></ol></section>
+</main><footer><p>Created for COP4813 Web Programming</p><p>Assignment 11 - Dynamic Objects</p></footer>
+<script src="advisor.js" defer></script></body></html>
