@@ -1,0 +1,221 @@
+{
+  "program": {
+    "name": "Software Development, A.S.",
+    "college": "Daytona State College",
+    "catalogYear": "2026-2027",
+    "programCode": "204700",
+    "catalogUrl": "https://daytonastate.smartcatalogiq.com/en/2026-2027/college-catalog/program-guides/a-s-degree/software-development-a-s-degree"
+  },
+  "courses": [
+    {
+      "code": "COP1000",
+      "title": "Principles of Computer Programming",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "CET1600",
+      "title": "Network Plus",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "EGS1000",
+      "title": "Professional Performance for Technicians",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "CTS1851",
+      "title": "Internet Web Foundations (HTML, CSS)",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "COP2700",
+      "title": "Introduction to Database Management",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "CTS2375",
+      "title": "Essentials of Cloud Computing",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "CAI2010",
+      "title": "Introduction to AI and Machine Learning with Python Programming",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "COP2072",
+      "title": "Data Services",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "CEN2002",
+      "title": "Software Design and Development I",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Required program-specific course."
+    },
+    {
+      "code": "COP2949",
+      "title": "Internship in Computer Programming",
+      "credits": 3,
+      "category": "Program core",
+      "notes": "Variable 1\u20134 credits; the program guide identifies 3 credits as the department-approved amount for this program."
+    },
+    {
+      "code": "COP2360",
+      "title": "C# Programming",
+      "credits": 3,
+      "category": "Programming choice",
+      "notes": "Choose COP2360 OR COP2800; students do not need both.",
+      "prerequisites": {
+        "allOf": [
+          "COP1000"
+        ],
+        "anyOf": []
+      },
+      "choiceGroup": "language"
+    },
+    {
+      "code": "COP2800",
+      "title": "Computer Programming Java",
+      "credits": 3,
+      "category": "Programming choice",
+      "notes": "Choose COP2800 OR COP2360; students do not need both.",
+      "prerequisites": {
+        "allOf": [],
+        "anyOf": []
+      },
+      "choiceGroup": "language"
+    },
+    {
+      "code": "CAI1320",
+      "title": "AI Application & Prompt Engineering",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "GEB2430",
+      "title": "AI, Business, Ethics, and Social Responsibility",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One elective choice; catalog notes it may also count toward the AI Awareness certificate."
+    },
+    {
+      "code": "CTS2321",
+      "title": "Linux Fundamentals",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CIS2350",
+      "title": "Principles of Information Assurance",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CTS2214",
+      "title": "Next-Gen Project Management: Human, AI & Automation",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "COP2220",
+      "title": "Computer Programming C",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CET2660",
+      "title": "Fundamentals of Cybersecurity Analysis",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CGS2820",
+      "title": "Web Programming (JavaScript, Ajax, ASP.Net)",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CAP2741",
+      "title": "Data Visualization",
+      "credits": 4,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CTS2450",
+      "title": "Business Intelligence",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "COP2071",
+      "title": "Querying Database",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CGS2100",
+      "title": "Microcomputer Applications",
+      "credits": 3,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "EET1011C",
+      "title": "Introduction to Electrical Circuits and Lab",
+      "credits": 4,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    },
+    {
+      "code": "CET1112C",
+      "title": "Digital Fundamentals and Lab",
+      "credits": 4,
+      "category": "Program elective",
+      "notes": "One of the program elective choices."
+    }
+  ],
+  "rules": {
+    "programmingChoice": {
+      "type": "OR",
+      "courses": [
+        "COP2360",
+        "COP2800"
+      ],
+      "note": "Select either C# Programming or Computer Programming Java, not both."
+    },
+    "electives": {
+      "type": "CHOOSE",
+      "count": 3,
+      "category": "Program elective",
+      "note": "Choose three program electives."
+    }
+  }
+}
