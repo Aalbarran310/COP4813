@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive Daytona State College Software Development course study planner for COP4813 Assignment 11.">
+<title>Study Planner | COP4813 Assignment 11</title>
+<link rel="stylesheet" href="style.css">
+<style>
+:root{--navy:#252f70;--blue:#0b5fa5;--green:#198754;--line:#e2e5e9;--muted:#707783}
+body{background:#f4f6f8;color:#263247}
+.planner-wrap{max-width:1240px;margin:1.5rem auto;padding:0 1rem}
+.planner-title{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 0 1rem;margin-bottom:1.25rem}
+.planner-title h1{font-weight:400;margin:0;color:#4b5563;font-size:2rem}
+.planner-layout{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(280px,.95fr);gap:1.5rem}
+.term-block{background:#fff;border:1px solid var(--line);border-radius:9px;margin-bottom:1rem;padding:1rem}
+.term-heading{display:flex;align-items:center;justify-content:space-between;gap:.7rem;border-bottom:1px solid var(--line);padding-bottom:.8rem;margin-bottom:.8rem;flex-wrap:wrap}
+.term-heading h2{margin:0;font-size:1.25rem;color:#25314d}
+.term-meta{display:flex;align-items:center;gap:.85rem;color:#46516a;font-size:.92rem}
+.term-courses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;min-height:100px}
+.planner-course{position:relative;border:1px solid #e1e4e8;background:#fafafa;border-radius:7px;padding:.85rem;min-height:105px;display:flex;flex-direction:column;justify-content:space-between}
+.planner-course strong{color:#263b73;font-size:.94rem;line-height:1.3}
+.planner-course small{color:var(--muted);margin-top:.35rem}
+.planner-course button{align-self:flex-end}
+.empty-term{grid-column:1/-1;color:#8a929d;padding:1.2rem;text-align:center;border:1px dashed #d7dce2;border-radius:7px}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:9px;padding:1rem;height:max-content;position:sticky;top:1rem}
+.sidebar h2{font-size:1.2rem;margin:.1rem 0 1rem;color:#333}
+.sidebar-top{display:flex;justify-content:space-between;align-items:center}
+.sidebar-tools{display:flex;gap:.45rem}
+.circle-btn{border:0;border-radius:50%;width:42px;height:42px;background:var(--navy);color:#fff;font-size:1.35rem;cursor:pointer}
+.sidebar select,.planner-select{padding:.55rem;border:1px solid #ccd2da;border-radius:6px;background:white;max-width:100%}
+.available-list{display:grid;gap:.55rem;max-height:590px;overflow:auto;padding:.3rem}
+.available-course{border:1px solid #e4e7eb;background:#fafafa;border-radius:7px;padding:.7rem;cursor:grab}
+.available-course:active{cursor:grabbing}
+.available-course strong{display:block;color:#263b73;font-size:.9rem}
+.available-course small{display:block;color:#747d89;margin:.25rem 0}
+.available-course button{margin-top:.35rem}
+.btn{border:0;border-radius:5px;padding:.48rem .7rem;background:#e9edf2;color:#26345f;cursor:pointer;font-weight:600}
+.btn.primary{background:var(--navy);color:white}.btn.green{background:var(--green);color:white}.btn:disabled{opacity:.45;cursor:not-allowed}
+.progress-box{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem}
+.progress-box h2{font-weight:400}.progress-line{display:flex;justify-content:space-between;gap:.5rem;margin:.5rem 0;color:#505967}
+.progress-track{height:9px;border-radius:9px;background:#e8ebef;overflow:hidden}.progress-fill{height:100%;background:var(--green);width:0}
+.bottom-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 2rem}
+.completed-panel,.rules-panel{background:white;border:1px solid var(--line);border-radius:9px;padding:1rem;margin:1rem 0}
+.completed-panel summary{cursor:pointer;font-weight:650;color:#263b73}
+.completed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.5rem;margin-top:.8rem}
+.completed-row{padding:.5rem;border:1px solid var(--line);border-radius:6px}
+.completed-row label{display:flex;gap:.5rem;align-items:flex-start}
+.drop-hint{font-size:.85rem;color:#77808c;margin:.2rem 0 .8rem}
+.drag-over{outline:3px dashed #198754;outline-offset:3px;background:#f0faf4}
+.toast{min-height:1.3rem;color:#176b43;font-size:.9rem}
+@media(max-width:850px){.planner-layout{grid-template-columns:1fr}.sidebar{position:static}.available-list{max-height:420px}.term-courses{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.term-courses{grid-template-columns:1fr}.planner-title h1{font-size:1.6rem}.term-heading{align-items:flex-start}.term-meta{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<header><div class="container"><h1>Dynamic Course Advisor</h1><p class="subtitle">COP4813 - Assignment 11</p>
+<nav aria-label="Main navigation"><ul class="menu"><li><a href="index.html">Home</a></li><li><a href="assignments.html">My Assignments</a></li><li><a href="assignment11.html" aria-current="page">Assignment 11</a></li></ul></nav></div></header>
+<main class="planner-wrap">
+<div class="planner-title"><h1>Study Planner</h1><span class="small-note">Software Development, A.S.</span></div>
+<section class="advisor-intro">
+<p>This planner uses the Daytona State College 2026–2027 Software Development A.S. program guide as its sample program. Mark completed courses, review eligible courses, and organize a semester plan.</p>
+<p class="small-note">Planning aid only—not an official degree audit. Confirm course availability and prerequisites with the college and your academic advisor.</p>
+<a href="https://daytonastate.smartcatalogiq.com/en/2026-2027/college-catalog/program-guides/a-s-degree/software-development-a-s-degree" target="_blank" rel="noopener">View official program guide</a>
+</section>
+<div class="planner-layout">
+<section aria-label="Semester study plan">
+<div id="terms-container"></div>
+<div class="bottom-actions">
+<button class="btn primary" id="add-term" type="button">＋ Add term</button>
+<button class="btn" id="move-all" type="button">↪ Move all available courses to selected term</button>
+<button class="btn" id="delete-plan" type="button">▣ Delete plan</button>
+</div>
+<div class="toast" id="planner-message" aria-live="polite"></div>
+</section>
+<aside class="sidebar" aria-label="Course container">
+<div class="sidebar-top"><h2>Course container</h2><div class="sidebar-tools"><button class="circle-btn" id="focus-filter" type="button" aria-label="Focus course filter">⌕</button></div></div>
+<p class="drop-hint">Drag an eligible course into a semester, or use its Add button.</p>
+<label for="category-filter">Course category</label>
+<select id="category-filter"><option value="All">All courses</option><option>Program core</option><option>Programming choice</option><option>Program elective</option></select>
+<div id="available-list" class="available-list" aria-live="polite"></div>
+<div class="progress-box">
+<h2>Study progress</h2>
+<div class="progress-line"><span>Completed credits</span><strong id="completed-credits">0</strong></div>
+<div class="progress-line"><span>Planned credits</span><strong id="planned-credits">0</strong></div>
+<div class="progress-line"><span>Program elective choices</span><strong id="elective-progress">0 / 3</strong></div>
+<div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+<p class="small-note" id="progress-summary">Loading program information...</p>
+</div>
+</aside>
+</div>
+<details class="completed-panel">
+<summary>Completed courses — select courses you have already passed</summary>
+<p class="small-note">Checking a course marks it completed and recalculates the available courses.</p>
+<div id="completed-list" class="completed-grid"></div>
+</details>
+<section class="rules-panel">
+<h2>Prerequisite and course-choice notes</h2>
+<ul><li><strong>AND:</strong> all courses listed in <code>allOf</code> must be completed.</li>
+<li><strong>OR:</strong> at least one course listed in <code>anyOf</code> must be completed.</li>
+<li><strong>C# / Java choice:</strong> COP2360 or COP2800 may be selected for the program choice, not both.</li>
+<li><strong>Electives:</strong> the planner limits the student to three planned program electives.</li></ul>
+<div id="or-demo" class="status" aria-live="polite"></div>
+<p class="small-note">The OR-prerequisite example is a practice demonstration only, not an actual Daytona State course prerequisite. COP2360 is shown with COP1000 as its catalog prerequisite; verify all current requirements in the official catalog.</p>
+</section>
+<section class="rules-panel"><h2>Modifications included</h2>
+<ol><li>Selected Daytona State College's 2026–2027 Software Development A.S. program.</li><li>Stored course information, credits, notes, and prerequisite rules in JSON.</li><li>Generated course tiles, checkboxes, and controls dynamically with JavaScript.</li><li>Added completed-course tracking and automatic eligibility updates.</li><li>Added AND and OR prerequisite logic and the C# / Java alternative-course restriction.</li><li>Added drag-and-drop and button-based course selection.</li><li>Added semester planning, credit totals, and a three-elective limit.</li></ol></section>
+</main>
+<footer><p>Created for COP4813 Web Programming</p><p>Assignment 11 - Dynamic Objects</p></footer>
+<script src="advisor.js" defer></script>
+</body></html>
