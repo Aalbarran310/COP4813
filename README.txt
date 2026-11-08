@@ -358,3 +358,77 @@ Best Practices, and SEO.
 
 Created by Alexander Albarran
 COP4813
+
+==================================================
+ASSIGNMENT 11 - Dynamic Objects
+==================================================
+
+COP4813 - Assignment 11: Dynamic Objects Created by Alexander Albarran
+
+ASSIGNMENT OVERVIEW
+
+For Assignment 11, I created a Study Planner for the Daytona State
+College Software Development, A.S. program. The planner lets students
+mark courses they have completed, see courses that may be available, and
+organize courses into semesters.
+
+The planner is based on the 2026-2027 program guide. It is a planning
+tool for this assignment, not an official degree audit. Students should
+check current course availability and requirements with Daytona State
+College.
+
+WHAT THE PLANNER DOES
+
+-   Shows courses, course codes, credit hours, and notes.
+-   Lets students mark courses they have already completed.
+-   Updates the available courses based on completed courses and
+    prerequisite rules.
+-   Lets students add courses to a semester and remove them from the
+    plan.
+-   Supports dragging eligible courses into a semester, as well as using
+    the Add to Term buttons.
+-   Displays planned credits and study progress.
+-   Includes semester controls for adding terms and managing the plan.
+
+PREREQUISITES AND COURSE CHOICES
+
+The advisor includes logic for AND prerequisites, where all listed
+courses must be completed, and OR prerequisites, where at least one
+listed course must be completed.
+
+It also demonstrates an alternative-course choice with COP2360 (C#
+Programming) and COP2800 (Computer Programming Java). Students can
+select one of these courses for the choice, and the other option is
+disabled after a selection is made.
+
+The sample OR prerequisite check is included to demonstrate how OR logic
+works. It is a practice example and should not be treated as an official
+Daytona State prerequisite.
+
+FILES
+
+-   assignment11.html - the Study Planner page.
+-   advisor.js - creates the course interface and handles course
+    selection, prerequisite checks, drag-and-drop, and semester
+    planning.
+-   advisor-data.json - stores the program and course information used
+    by the planner.
+-   assignments.html - includes the link to Assignment 11 from the My
+    Assignments page.
+
+
+MODIFICATIONS MADE
+
+1.  Used the Daytona State College Software Development, A.S. program as
+    the sample program.
+2.  Stored course and program information in an external JSON file.
+3.  Created course cards and controls dynamically with JavaScript.
+4.  Added completed-course tracking and course availability updates.
+5.  Added AND and OR prerequisite checking.
+6.  Added the COP2360/COP2800 alternative-course restriction.
+7.  Added drag-and-drop and Add to Term controls.
+8.  Added semester planning, course removal, and credit totals.
+9.  Added a study progress section and notes explaining course choices.
+
+Created by Alexander Albarran
+COP4813
