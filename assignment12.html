@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A comparison of five content management systems for COP4813 Assignment 12.">
+  <title>Assignment 12 - CMS Review</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cms-intro,.cms-table-wrap,.cms-notes{background:#fff;border-radius:10px;padding:1.1rem;margin:1rem 0;box-shadow:0 2px 8px #00000012}
+    .cms-intro h2,.cms-notes h2{color:#0b5fa5;margin-top:0}
+    .cms-table-wrap{overflow-x:auto}
+    #cms-table{width:100%;border-collapse:collapse;min-width:1050px;font-size:.92rem}
+    #cms-table th{background:#075a9f;color:#fff;text-align:left;padding:.85rem;vertical-align:top}
+    #cms-table td{border:1px solid #d8e1e8;padding:.85rem;vertical-align:top;line-height:1.5}
+    #cms-table tbody tr:nth-child(even){background:#f2f8fc}
+    #cms-table ul{padding-left:1.15rem;margin:.2rem 0}
+    #cms-table li{margin-bottom:.35rem}
+    .cms-source-list{font-size:.88rem;margin-top:.7rem}
+    .cms-source-list a{display:block;margin:.25rem 0}
+    .cms-system{font-weight:700;color:#075a9f}
+    .cms-small{font-size:.9rem;color:#4b5563}
+    .cms-loading{padding:1rem;background:#eef6ff;border-radius:8px}
+    @media(max-width:700px){.cms-intro,.cms-table-wrap,.cms-notes{padding:.8rem}#cms-table{font-size:.86rem}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>CMS Review</h1>
+    <p class="subtitle">COP4813 - Assignment 12</p>
+    <nav aria-label="Main navigation">
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="assignments.html">My Assignments</a></li>
+        <li><a href="assignment11.html">Assignment 11</a></li>
+        <li><a href="assignment12.html" aria-current="page">Assignment 12</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="cms-intro">
+    <h2>Content Management System Comparison</h2>
+    <p>For this assignment, I researched five content management systems and compared who supports them, the technology behind them, their main features, and some limitations. I included an example website for each system.</p>
+    <p class="cms-small">The information is stored in an external JSON file. JavaScript reads that file and creates the comparison table on this page.</p>
+  </section>
+  <section class="cms-table-wrap" aria-labelledby="comparison-heading">
+    <h2 id="comparison-heading">CMS Comparison Table</h2>
+    <div id="cms-status" class="cms-loading" role="status">Loading CMS information...</div>
+    <table id="cms-table" hidden>
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Produced / Supported By</th>
+          <th>Technology Base</th>
+          <th>Major Capabilities</th>
+          <th>Major Limitations</th>
+          <th>Example Site</th>
+        </tr>
+      </thead>
+      <tbody id="cms-table-body"></tbody>
+    </table>
+  </section>
+  <section class="cms-notes">
+    <h2>What I found</h2>
+    <p>WordPress, Drupal, and Joomla are open-source systems that can be installed with a hosting provider. They offer flexibility through themes and extensions, but the site owner is responsible for hosting, updates, and security maintenance.</p>
+    <p>Wix and Shopify are hosted services. They handle much of the server maintenance, which can make them easier to start using. The trade-off is that the site depends more on the provider's platform and rules. Wix is aimed at a wide range of websites, while Shopify is mainly focused on online stores.</p>
+    <p>Each system has a different purpose. The best choice depends on the type of website, the amount of customization needed, the available budget, and how much technical maintenance the owner wants to handle.</p>
+  </section>
+</main>
+<footer>
+  <p>Created for COP4813 Web Programming</p>
+  <p>Assignment 12 - CMS Review</p>
+</footer>
+<script src="cms.js" defer></script>
+</body>
+</html>

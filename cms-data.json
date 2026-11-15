@@ -1,0 +1,179 @@
+{
+  "assignment": "COP4813 Assignment 12 - CMS Review",
+  "systems": [
+    {
+      "system": "WordPress",
+      "support": "Open-source software maintained by the WordPress project and community. It can be installed with many independent hosting providers.",
+      "technology": "Server: PHP. Database: MySQL or MariaDB. Browser side: HTML, CSS, and JavaScript. It can also provide content through its REST API.",
+      "capabilities": [
+        "Large selection of themes and plugins",
+        "Built-in posts, pages, media library, users, and comments",
+        "Custom post types and page editing tools",
+        "REST API for connecting other applications"
+      ],
+      "limitations": [
+        "Site owners are responsible for updates, backups, hosting, and security configuration",
+        "Poorly maintained or incompatible plugins and themes can create security or stability problems",
+        "Large numbers of plugins can make a site harder to maintain"
+      ],
+      "example": {
+        "name": "NASA",
+        "url": "https://www.nasa.gov/"
+      },
+      "sources": [
+        {
+          "label": "WordPress requirements",
+          "url": "https://wordpress.org/about/requirements/"
+        },
+        {
+          "label": "WordPress showcase - NASA",
+          "url": "https://wordpress.org/showcase/nasa/"
+        },
+        {
+          "label": "WordPress REST API",
+          "url": "https://developer.wordpress.org/rest-api/"
+        }
+      ]
+    },
+    {
+      "system": "Drupal",
+      "support": "Free, open-source CMS supported by the Drupal community, contributors, and commercial service providers.",
+      "technology": "Server: PHP. Databases include MySQL/MariaDB, PostgreSQL, and SQLite. Browser side: HTML, CSS, and JavaScript. Runs on a web server such as Apache or Nginx.",
+      "capabilities": [
+        "Flexible content types, fields, and content workflows",
+        "Modules and themes extend features and design",
+        "Strong user roles and permission controls",
+        "Multilingual and accessibility features",
+        "APIs and options for headless or decoupled sites"
+      ],
+      "limitations": [
+        "More technical knowledge is usually needed for setup and ongoing administration",
+        "Customizing complex sites can require experienced developers",
+        "Modules and major version upgrades need planning and compatibility checks"
+      ],
+      "example": {
+        "name": "Luton Borough Council",
+        "url": "https://www.luton.gov.uk/"
+      },
+      "sources": [
+        {
+          "label": "Drupal overview",
+          "url": "https://www.drupal.org/docs/getting-started/understanding-drupal/overview-of-drupal"
+        },
+        {
+          "label": "Drupal system requirements",
+          "url": "https://www.drupal.org/docs/getting-started/system-requirements"
+        },
+        {
+          "label": "Luton Council Drupal case study",
+          "url": "https://new.drupal.org/case-study/accelerating-public-sector-delivery-how-luton-council-transformed-its-web-presence-in-11-weeks"
+        }
+      ]
+    },
+    {
+      "system": "Joomla",
+      "support": "Free, open-source CMS developed by the Joomla project and supported by its volunteer and developer community.",
+      "technology": "Server: PHP. Database: MySQL, MariaDB, or PostgreSQL. Web server: Apache, Nginx, or Microsoft IIS. Browser side: HTML, CSS, and JavaScript.",
+      "capabilities": [
+        "Templates control site layout and appearance",
+        "Extensions include components, modules, plugins, and languages",
+        "User groups and access-control levels",
+        "Built-in multilingual support and content management tools"
+      ],
+      "limitations": [
+        "Administrators must maintain the hosting environment and apply updates",
+        "Some advanced features require third-party extensions",
+        "Extensions and templates must be checked for compatibility during upgrades"
+      ],
+      "example": {
+        "name": "Night Sky Glamping",
+        "url": "https://www.nightskyglamping.co.uk/"
+      },
+      "sources": [
+        {
+          "label": "Joomla hosting setup and requirements",
+          "url": "https://guide.joomla.org/user-guide/getting-started/getting-started-hosting-setup"
+        },
+        {
+          "label": "Joomla extension types",
+          "url": "https://docs.joomla.org/Extension_types_(technical_definitions)/en"
+        },
+        {
+          "label": "Joomla Showcase - Night Sky Glamping",
+          "url": "https://showcase.joomla.org/browse-sites/22945.html"
+        }
+      ]
+    },
+    {
+      "system": "Wix",
+      "support": "Commercial, hosted website builder and CMS operated by Wix. It is a subscription-based service with different plan levels.",
+      "technology": "Cloud-hosted SaaS platform. Wix manages the server and content storage. The site uses web technologies such as HTML, CSS, and JavaScript; Wix CMS provides managed content collections and APIs.",
+      "capabilities": [
+        "Visual drag-and-drop site editor and ready-made templates",
+        "Managed CMS collections for structured content",
+        "Dynamic pages, forms, galleries, and connected site elements",
+        "Built-in hosting, security management, and platform updates",
+        "Business tools such as bookings and online stores"
+      ],
+      "limitations": [
+        "The site must run on Wix infrastructure and cannot be independently hosted elsewhere as a complete Wix site",
+        "Moving to another platform can require rebuilding parts of the site",
+        "Advanced customization is limited by the Wix platform and available plan features"
+      ],
+      "example": {
+        "name": "Izzy Wheels",
+        "url": "https://www.izzywheels.com/"
+      },
+      "sources": [
+        {
+          "label": "Wix CMS overview",
+          "url": "https://support.wix.com/en/article/cms-content-management-system-an-overview"
+        },
+        {
+          "label": "Wix site export and hosting limitation",
+          "url": "https://support.wix.com/en/article/exporting-or-embedding-your-wix-site-elsewhere"
+        },
+        {
+          "label": "Wix website examples",
+          "url": "https://www.wix.com/blog/wix-websites-examples"
+        }
+      ]
+    },
+    {
+      "system": "Shopify",
+      "support": "Commercial, hosted e-commerce platform operated by Shopify. It is offered through paid subscription plans and an app ecosystem.",
+      "technology": "Cloud-hosted SaaS platform. Themes use Shopify Liquid along with HTML, CSS, and JavaScript. Product, order, and customer data are managed by Shopify; APIs support integrations and custom storefronts.",
+      "capabilities": [
+        "Product catalog, inventory, shopping cart, and checkout",
+        "Themes and theme editor for storefront design",
+        "Apps and APIs for extending store features",
+        "Payment, shipping, tax, and sales-channel integrations",
+        "Tools for managing orders and customer information"
+      ],
+      "limitations": [
+        "Best suited to online selling rather than every type of general-purpose website",
+        "Monthly plan and some app or transaction-related costs can add up",
+        "Advanced storefront and checkout customization can depend on plan level and platform rules",
+        "The hosted platform limits control over the underlying server and database"
+      ],
+      "example": {
+        "name": "Gymshark",
+        "url": "https://www.gymshark.com/"
+      },
+      "sources": [
+        {
+          "label": "Shopify developer documentation",
+          "url": "https://shopify.dev/docs"
+        },
+        {
+          "label": "Shopify APIs and Liquid",
+          "url": "https://shopify.dev/docs/api"
+        },
+        {
+          "label": "Shopify case study - Gymshark",
+          "url": "https://www.shopify.com/case-studies/gymshark"
+        }
+      ]
+    }
+  ]
+}
