@@ -432,3 +432,26 @@ MODIFICATIONS MADE
 
 Created by Alexander Albarran
 COP4813
+
+==================================================
+ASSIGNMENT 12 - CMS Review
+==================================================
+
+For this assignment, I researched five CMS platforms: WordPress, Drupal, Joomla, Wix, and Shopify.
+
+I created a comparison table showing who supports each system, its technology, main features, limitations, and example websites.
+
+The information is stored in an external JSON file and displayed using JavaScript.
+
+Files used:
+
+assignment12.html
+
+cms-data.json
+
+cms.js
+
+What I learned: I learned the differences between CMS platforms and how to use JSON and JavaScript to dynamically display information on a webpage.
+
+Created by Alexander Albarran
+COP4813
